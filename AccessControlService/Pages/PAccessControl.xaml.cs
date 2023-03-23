@@ -77,7 +77,7 @@ namespace AccessControlService.Pages
 
         private void BanTime()
         {
-            if (index == 2 || employee.BanTime.Value.Minute + 5 > DateTime.Now.Minute)
+            if (index == 2 || employee.BanTime.Value.Minute + 5 > DateTime.Now.Minute)//если не закрывать приложение снятие бана по истечению времени работает
             {
                 employee.BanTime = DateTime.Now;
                 App.DB.SaveChanges();
