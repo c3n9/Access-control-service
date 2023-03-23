@@ -15,5 +15,6 @@ namespace AccessControlService
     public partial class App : Application
     {
         public static GuardEntities DB = new GuardEntities();
+        public static MainWindow MainWindowInstance = new MainWindow();
     }
 }

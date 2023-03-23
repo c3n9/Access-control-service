@@ -39,6 +39,7 @@
     <Property Name="Login" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="image" />
+    <Property Name="BanTime" Type="date" />
   </EntityType>
   <Association Name="FK_User_Gender">
     <End Role="Gender" Type="Self.Gender" Multiplicity="1" />

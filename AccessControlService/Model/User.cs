@@ -25,6 +25,7 @@ namespace AccessControlService.Model
         public string Login { get; set; }
         public string Password { get; set; }
         public byte[] Photo { get; set; }
+        public Nullable<System.DateTime> BanTime { get; set; }
     
         public virtual Gender Gender { get; set; }
         public virtual Type Type { get; set; }

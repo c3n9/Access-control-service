@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:AccessControlService.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PLogin">
+      Title="PLogin"
+      Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -60,10 +61,12 @@
                     Content="Войти в систему"
                     Click="BLogin_Click"
                     Margin="0,0,0,10"/>
-            <TextBlock Text="Забыли данные для входа"
-                       Hyperlink.Click="TextBlock_Click"
-                       Foreground="Blue"
-                       TextDecorations="Underline"/>
+            <TextBlock>
+                <Hyperlink x:Name="HLRecovery"
+                           Click="HLRecovery_Click">
+                    Забыли данные для входа
+                </Hyperlink>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Page>

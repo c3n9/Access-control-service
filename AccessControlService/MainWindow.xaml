@@ -7,7 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="BBack"
+                Content="Назад"
+                Click="BBack_Click"
+                HorizontalAlignment="Right"
+                Margin="0,10,10,0"/>
         <Frame x:Name="MainFrame"
-               NavigationUIVisibility="Hidden"/>
+               NavigationUIVisibility="Hidden"
+               Grid.Row="1"/>
     </Grid>
 </Window>

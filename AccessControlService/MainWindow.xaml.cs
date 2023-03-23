@@ -24,7 +24,13 @@ namespace AccessControlService
         public MainWindow()
         {
             InitializeComponent();
+            App.MainWindowInstance = this;
             MainFrame.Navigate(new PLogin());
+        }
+
+        private void BBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.GoBack();
         }
     }
 }

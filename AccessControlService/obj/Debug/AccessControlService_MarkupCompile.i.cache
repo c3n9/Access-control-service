@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\quart\source\repos\AccessControlService\AccessControlService\obj\Debug\
+C:\Users\quart\OneDrive\Рабочий стол\guardian\AccessControlService\AccessControlService\obj\Debug\
 AccessControlService
 none
 false
 DEBUG;TRACE
-C:\Users\quart\source\repos\AccessControlService\AccessControlService\App.xaml
-3-1495478841
+C:\Users\quart\OneDrive\Рабочий стол\guardian\AccessControlService\AccessControlService\App.xaml
+4907055536
 2691345527
-15-1539437849
-18-1024040693
-MainWindow.xaml;Pages\PAccessControl.xaml;Pages\PLogin.xaml;
+16-1866251426
+181644019573
+MainWindow.xaml;Pages\PAccessControl.xaml;Pages\PLogin.xaml;Pages\PRecovery.xaml;
 
 False
 

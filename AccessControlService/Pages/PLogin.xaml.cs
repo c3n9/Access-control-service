@@ -23,7 +23,7 @@ namespace AccessControlService.Pages
         public PLogin()
         {
             InitializeComponent();
-            CBType.ItemsSource = App.DB.Type.ToList();
+            Refresh();
         }
 
         private void BLogin_Click(object sender, RoutedEventArgs e)
@@ -54,14 +54,31 @@ namespace AccessControlService.Pages
             }
             if( user.TypeId == 1 && user.Password == TBPassword.Text && user.SecretWord == TBSecretWord.Text)
             {
-                NavigationService.Navigate(new PAccessControl());
+                NavigationService.Navigate(new PAccessControl(user));
             }
             
         }
 
-        private void TextBlock_Click(object sender, RoutedEventArgs e)
+        private void Refresh()
         {
-        
+            CBType.ItemsSource = App.DB.Type.ToList();
+            App.MainWindowInstance.BBack.Visibility = Visibility.Collapsed;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void HLRecovery_Click(object sender, RoutedEventArgs e)
+        {
+            var user = App.DB.User.FirstOrDefault(u => u.Login == TBLogin.Text);
+            if (user == null) 
+            {
+                MessageBox.Show("Введите логин для восстановления");
+                return;
+            }
+            NavigationService.Navigate(new PRecovery(user));
         }
     }
 }

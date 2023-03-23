@@ -23,17 +23,24 @@ namespace AccessControlService.Pages
     /// </summary>
     public partial class PAccessControl : Page
     {
+        int index = 0;
         User contextUser = new User();
-        public PAccessControl()
+        User employee;
+        public PAccessControl(User user)
         {
             InitializeComponent();
+            employee= user;
+            BanTime();
+            TBFullName.Text = $"{user.Surname} {user.Name[0]}. {user.Patronymic[0]}.";
+            App.MainWindowInstance.BBack.Visibility = Visibility.Visible;
             DataContext = contextUser;
             CBGender.ItemsSource = App.DB.Gender.ToList();
         }
 
         private void BSave_Click(object sender, RoutedEventArgs e)
         {
-            int index = 0;
+            index++;
+            BanTime();
             string error = "";
             if (String.IsNullOrWhiteSpace(contextUser.Surname))
             {
@@ -55,7 +62,6 @@ namespace AccessControlService.Pages
             {
                 error += "Загрузите фотографию\n";
             }
-            contextUser.Gender = CBGender.SelectedItem as Gender;
             if(CBGender.SelectedItem == null)
             {
                 error += "Выберите пол\n";
@@ -69,7 +75,35 @@ namespace AccessControlService.Pages
             App.DB.SaveChanges();
         }
 
-        private void BAddPhoto_Click(object sender, RoutedEventArgs e)
+        private void BanTime()
+        {
+            if (index == 2 || employee.BanTime.Value.Minute + 5 > DateTime.Now.Minute)
+            {
+                employee.BanTime = DateTime.Now;
+                App.DB.SaveChanges();
+                index = 0;
+                TBName.IsEnabled = false;
+                TBSurname.IsEnabled = false;
+                TBPatronymic.IsEnabled = false;
+                BCancel.IsEnabled = false;
+                BSave.IsEnabled = false;
+                TBPost.IsEnabled = false;
+                HLAddPhoto.IsEnabled = false;
+                CBGender.IsEnabled = false;
+            }
+            else
+            {
+                TBName.IsEnabled = true;
+                TBSurname.IsEnabled = true;
+                TBPatronymic.IsEnabled = true;
+                BCancel.IsEnabled = true;
+                BSave.IsEnabled = true;
+                TBPost.IsEnabled = true;
+                HLAddPhoto.IsEnabled = true;
+                CBGender.IsEnabled = true;
+            }
+        }
+        private void HLAddPhoto_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog() { Filter = ".png, .jpg, .jpeg | *.png; *.jpg; *.jpeg" };
             if (dialog.ShowDialog().GetValueOrDefault())
@@ -79,6 +113,19 @@ namespace AccessControlService.Pages
                 DataContext = null;
                 DataContext = contextUser;
             }
+        }
+
+        private void BCancel_Click(object sender, RoutedEventArgs e)
+        {
+            contextUser = new User();
+            DataContext = null;
+            DataContext = contextUser;
+            MessageBox.Show("Данные очищены");
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            BanTime();
         }
     }
 }

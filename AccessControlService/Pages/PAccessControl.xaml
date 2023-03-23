@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:AccessControlService.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PAccessControl">
+      Title="PAccessControl"
+      Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,12 +16,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <TextBlock x:Name="TBFullName"
+                   HorizontalAlignment="Right"
+                   Grid.ColumnSpan="3"
+                   Margin="0,10,10,0"/>
         <StackPanel VerticalAlignment="Bottom"
                     HorizontalAlignment="Right"
-                    Margin="0,0,10,0">
+                    Margin="0,0,10,0"
+                    Grid.Row="1">
             <TextBlock Text="Фамилия"
                        Margin="0,0,0,13"/>
             <TextBlock Text="Имя"
@@ -34,7 +41,8 @@
         </StackPanel>
         <StackPanel Grid.Column="1"
                     VerticalAlignment="Bottom"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left"
+                    Grid.Row="1">
             <TextBox x:Name="TBSurname"
                      Text="{Binding Surname}"
                      MaxLength="50"
@@ -51,7 +59,7 @@
             <ComboBox x:Name="CBGender"
                       DisplayMemberPath="Name"
                       Margin="0,0,0,10"
-                      SelectedItem="{Binding Gender.Name}"/>
+                      SelectedItem="{Binding Gender}"/>
             <TextBox x:Name="TBPost"
                      Text="{Binding Post}"
                      MaxLength="50"
@@ -60,22 +68,26 @@
         <StackPanel Grid.Column="2"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
-                    Margin="10,0,0,0">
+                    Margin="10,0,0,10"
+                    Grid.Row="1">
             <Image Source="{Binding Photo}"
                    x:Name="IPhoto"
                    Width="100"
                    Height="100"/>
-            <Button x:Name="BAddPhoto"
-                    Content="Загрузите фото"
-                    Margin="0,10,0,10"
-                    Click="BAddPhoto_Click"
-                    BorderThickness="0"
-                    Background="white"/>
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink x:Name="HLAddPhoto" 
+                           Click="HLAddPhoto_Click"
+                           Foreground="Black"
+                           TextDecorations="None">
+                    Загрузите фото
+                </Hyperlink>
+            </TextBlock>
+                       
         </StackPanel>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="1">
             <Button x:Name="BSave"
                     Content="Сохранить"
@@ -84,7 +96,7 @@
                     Margin="0,0,10,0"/>
             <Button x:Name="BCancel"
                     Content="Отменить"
-                    Click="BSave_Click"
+                    Click="BCancel_Click"
                     Width="70"/>
         </StackPanel>
     </Grid>
