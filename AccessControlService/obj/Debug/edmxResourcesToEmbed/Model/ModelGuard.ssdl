@@ -40,6 +40,10 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="image" />
     <Property Name="BanTime" Type="date" />
+    <Property Name="Approved" Type="bit" />
+    <Property Name="AddData" Type="bit" />
+    <Property Name="ViewData" Type="bit" />
+    <Property Name="Reports" Type="bit" />
   </EntityType>
   <Association Name="FK_User_Gender">
     <End Role="Gender" Type="Self.Gender" Multiplicity="1" />

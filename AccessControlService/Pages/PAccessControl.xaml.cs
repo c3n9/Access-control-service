@@ -73,23 +73,47 @@ namespace AccessControlService.Pages
             }
             App.DB.User.Add(contextUser);
             App.DB.SaveChanges();
+
+            contextUser = new User();
+            DataContext = null;
+            DataContext = contextUser;
+            MessageBox.Show("Пользователь сохранен");
         }
 
         private void BanTime()
         {
-            if (index == 2 || employee.BanTime.Value.Minute + 5 > DateTime.Now.Minute)//если не закрывать приложение снятие бана по истечению времени работает
+            if(employee.BanTime == null && index == 2)
             {
                 employee.BanTime = DateTime.Now;
                 App.DB.SaveChanges();
-                index = 0;
-                TBName.IsEnabled = false;
-                TBSurname.IsEnabled = false;
-                TBPatronymic.IsEnabled = false;
-                BCancel.IsEnabled = false;
-                BSave.IsEnabled = false;
-                TBPost.IsEnabled = false;
-                HLAddPhoto.IsEnabled = false;
-                CBGender.IsEnabled = false;
+            }
+            if (employee.BanTime != null)
+            {
+                if (index == 2 || employee.BanTime.Value.Minute + 5 > DateTime.Now.Minute)//если не закрывать приложение снятие бана по истечению времени работает
+                {
+                    employee.BanTime = DateTime.Now;
+                    App.DB.SaveChanges();
+                    index = 0;
+                    TBName.IsEnabled = false;
+                    TBSurname.IsEnabled = false;
+                    TBPatronymic.IsEnabled = false;
+                    BCancel.IsEnabled = false;
+                    BSave.IsEnabled = false;
+                    TBPost.IsEnabled = false;
+                    HLAddPhoto.IsEnabled = false;
+                    CBGender.IsEnabled = false;
+                }
+                else
+                {
+                    TBName.IsEnabled = true;
+                    TBSurname.IsEnabled = true;
+                    TBPatronymic.IsEnabled = true;
+                    BCancel.IsEnabled = true;
+                    BSave.IsEnabled = true;
+                    TBPost.IsEnabled = true;
+                    HLAddPhoto.IsEnabled = true;
+                    CBGender.IsEnabled = true;
+                }
             }
             else
             {
